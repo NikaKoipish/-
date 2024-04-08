@@ -12,12 +12,14 @@ def index_contacts(request):
     contacts = Contacts.objects.all()
     return render(request, 'catalog/index_contacts.html', {'contacts': contacts})
 
+
 def index_home(request):
     context = {
         'object_list': Product.objects.all(),
         'title': 'Beautystore - Главная'
     }
     return render(request, 'catalog/index_home.html', context)
+
 
 def product(request,pk):
     product_item = Product.objects.get(pk=pk)
