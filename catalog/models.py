@@ -36,7 +36,9 @@ class Product(models.Model):
 class Contacts(models.Model):
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамилия')
-    email = models.EmailField(verbose_name='Электронная почта')
+    phone = models.CharField(max_length=100, verbose_name='Телефон')
+    message = models.CharField(max_length=100, verbose_name='Сообщение')
+    email = models.EmailField(verbose_name='Электронная почта', **NULLABLE)
 
     def __str__(self):
         return f'{self.first_name} {self.email}'
