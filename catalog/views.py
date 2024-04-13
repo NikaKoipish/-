@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from catalog.models import Product, Contacts
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+
+from catalog.models import Product, Contacts, Article
+from django.views.generic import ListView, DetailView, CreateView
 
 
 class ProductListView(ListView):
@@ -29,3 +31,8 @@ def index_contacts(request):
 
 def contact_list(request):
     Contacts.objects.all()
+
+class ArticleCreateView(CreateView):
+    model = Article
+    fields = ('title', 'content', 'preview')
+    success_url = reverse_lazy('catalog:index_home')
