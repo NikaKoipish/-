@@ -55,7 +55,7 @@ class Article(models.Model):
     preview = models.ImageField(upload_to='articles/', verbose_name='Изображение', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     is_published = models.BooleanField(default=True, verbose_name='Статус публикации')
-    view_count = models.IntegerField(verbose_name='Количество просмотров')
+    view_count = models.IntegerField(verbose_name='Количество просмотров', **NULLABLE)
 
     def __str__(self):
         return f'{self.title}'
