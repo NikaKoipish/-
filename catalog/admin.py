@@ -19,6 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class ContactsAdmin(admin.ModelAdmin):
     list_display = ('pk', 'first_name', 'email',)
 
+
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('slug', 'title', 'content',)
