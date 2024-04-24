@@ -49,5 +49,3 @@ def index_contacts(request):
 
 def contact_list(request):
     Contacts.objects.all()
-
-
