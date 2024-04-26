@@ -1,14 +1,27 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
-from catalog.forms import ProductForm
-from catalog.models import Product, Contacts
+from catalog.forms import ProductForm, VersionForm
+from catalog.models import Product, Contacts, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/index_home.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        products = Product.objects.all()
+
+        for product in products:
+            versions = Version.objects.filter(product=product)
+            active_versions = versions.filter(is_active=True)
+            if active_versions:
+                product.name = active_versions.last().name
+                product.number = active_versions.last().number
+        context_data['object_list'] = products
+        return context_data
 
 
 class ProductDetailView(DetailView):
