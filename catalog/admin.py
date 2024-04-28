@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):
-    list_display = ('product', 'number', 'name', 'is_activegi')
+    list_display = ('product', 'number', 'name', 'is_active')
     list_filter = ('number', 'name',)
     search_fields = ('name',)
 

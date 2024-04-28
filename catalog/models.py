@@ -52,7 +52,7 @@ class Version(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, verbose_name='ID продукта')
     number = models.IntegerField(verbose_name='номер версии')
     name = models.CharField(max_length=50, verbose_name='название версии')
-    is_active = models.BooleanField(default=True, verbose_name='признак активности версии')
+    is_active = models.BooleanField(default=False, verbose_name='признак активности версии')
 
     def __str__(self):
         return f'{self.name} ({self.number})'

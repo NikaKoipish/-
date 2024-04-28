@@ -62,3 +62,25 @@ def index_contacts(request):
 
 def contact_list(request):
     Contacts.objects.all()
+
+
+class VersionListView(ListView):
+    model = Version
+    template_name = 'catalog/version_list.html'
+
+
+class VersionDetailView(DetailView):
+    model = Version
+    template_name = 'catalog/version_detail.html'
+
+
+class VersionCreateView(CreateView):
+    model = Version
+    form_class = VersionForm
+    success_url = reverse_lazy('catalog:index_home')
+
+
+class VersionUpdateView(UpdateView):
+    model = Version
+    form_class = VersionForm
+    success_url = reverse_lazy('catalog:index_home')
