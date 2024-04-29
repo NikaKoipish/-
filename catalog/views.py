@@ -78,7 +78,6 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-
 def index_contacts(request):
     if request.method == "POST":
         first_name = request.POST.get('name')
@@ -95,6 +94,3 @@ def index_contacts(request):
 
 def contact_list(request):
     Contacts.objects.all()
-
-
-

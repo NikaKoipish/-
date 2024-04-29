@@ -49,7 +49,7 @@ class Contacts(models.Model):
 
 
 class Version(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, verbose_name='ID продукта')
+    product = models.ForeignKey(Product, related_name='versions', on_delete=models.CASCADE, verbose_name='продукт')
     number = models.IntegerField(verbose_name='номер версии')
     name = models.CharField(max_length=50, verbose_name='название версии')
     is_active = models.BooleanField(default=False, verbose_name='признак активности версии')
