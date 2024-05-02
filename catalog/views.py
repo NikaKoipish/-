@@ -42,7 +42,7 @@ class ProductCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
         context_data['formset'] = VersionFormset(instance=self.object)
         return context_data
 

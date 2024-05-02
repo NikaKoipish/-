@@ -12,7 +12,7 @@
                 <!--                <img src="/media/{{ object.image }}" height="111" class="img-thumbnail">-->
                 <img src="{{ object.image|mymedia }}" height="111" class="img-thumbnail">
                 <h3 class="card-title pricing-card-title">{{ object.price }} руб.</h3>
-                <span class="textarea">{{ object.description|slice:100 }}</span>
+                <span class="textarea">{{ object.description|truncatewords:10 }}</span>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                 </ul>
                 <div>
