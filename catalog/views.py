@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -35,7 +36,7 @@ class ProductDeleteView(DeleteView):
     success_url = reverse_lazy('catalog:index_home')
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(CreateView, LoginRequiredMixin):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index_home')
@@ -47,6 +48,10 @@ class ProductCreateView(CreateView):
         return context_data
 
     def form_valid(self, form):
+        product = form.save()
+        user = self.request.user
+        product.owner = user
+        product.save()
         formset = self.get_context_data()['formset']
         self.object = form.save()
         if formset.is_valid():
