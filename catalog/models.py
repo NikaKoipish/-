@@ -28,7 +28,6 @@ class Product(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Владелец', **NULLABLE)
 
-
     def __str__(self):
         return f'{self.category} {self.name} - {self.price}'
 

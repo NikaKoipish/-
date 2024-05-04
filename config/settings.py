@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -147,8 +147,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "nika.kopish@yandex.ru"
-EMAIL_HOST_PASSWORD = "eewttoswxlkgzevs"
+EMAIL_HOST_USER = "nika.koipish@yandex.ru"
+EMAIL_HOST_PASSWORD = 'tgpyuwucypwgqbwu'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
