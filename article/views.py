@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -8,7 +9,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 from pytils.translit import slugify
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     form_class = ArticleManagerForm
     success_url = reverse_lazy('article:articles')
@@ -28,7 +29,7 @@ class ArticleCreateView(CreateView):
         raise PermissionDenied
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     form_class = ArticleManagerForm
     success_url = reverse_lazy('article:articles')
@@ -51,7 +52,7 @@ class ArticleUpdateView(UpdateView):
         raise PermissionDenied
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Article
     success_url = reverse_lazy('article:articles')
 
