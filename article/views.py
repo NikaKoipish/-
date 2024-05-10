@@ -1,6 +1,8 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 
+from article.forms import ArticleManagerForm
 from article.models import Article
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
@@ -8,7 +10,7 @@ from pytils.translit import slugify
 
 class ArticleCreateView(CreateView):
     model = Article
-    fields = ('title', 'content', 'preview')
+    form_class = ArticleManagerForm
     success_url = reverse_lazy('article:articles')
 
     def form_valid(self, form):
@@ -19,10 +21,16 @@ class ArticleCreateView(CreateView):
 
         return super().form_valid(form)
 
+    def get_form_class(self):
+        user = self.request.user
+        if user.has_perm("article.change_article"):
+            return ArticleManagerForm
+        raise PermissionDenied
+
 
 class ArticleUpdateView(UpdateView):
     model = Article
-    fields = ('title', 'content', 'preview')
+    form_class = ArticleManagerForm
     success_url = reverse_lazy('article:articles')
 
     def get_success_url(self):
@@ -35,6 +43,12 @@ class ArticleUpdateView(UpdateView):
             new_article.save()
 
         return super().form_valid(form)
+
+    def get_form_class(self):
+        user = self.request.user
+        if user.has_perm("article.change_article"):
+            return ArticleManagerForm
+        raise PermissionDenied
 
 
 class ArticleDeleteView(DeleteView):

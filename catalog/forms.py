@@ -19,6 +19,22 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         model = Product
         exclude = ('owner', 'created_at', 'updated_at')
 
+    def clean_description(self):
+        cleaned_data = self.cleaned_data['description']
+        word_list = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
+        for word in word_list:
+            if word in cleaned_data:
+                raise forms.ValidationError(f'использование слова "{word}" недопустимо')
+        return cleaned_data
+
+    def clean_name(self):
+        cleaned_data = self.cleaned_data['name']
+        word_list = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
+        for word in word_list:
+            if word in cleaned_data:
+                raise forms.ValidationError(f'использование слова "{word}" недопустимо')
+        return cleaned_data
+
 
 class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
     class Meta:

@@ -1,5 +1,6 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Beautystore</h5>
+    <span class="my-0 mr-md-auto font-weight-normal"> ({{ user.email }})</span>
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
         {% if user.is_authenticated %}
@@ -8,7 +9,7 @@
         {% endif %}
         <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
         <a class="p-2 btn btn-outline-primary" href="/articles/">Все статьи</a>
-        {% if user.is_authenticated %}
+        {% if perms.article.add_article and perms.article.change_article and perms.delete_article %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'article:create_article' %}">Добавить статью</a>
         {% endif %}
         {% if user.is_authenticated %}
