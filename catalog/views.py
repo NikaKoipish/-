@@ -5,8 +5,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Contacts, Version
+from catalog.models import Product, Contacts, Version, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from catalog.services import get_categories_from_cache
 
 
 class ProductListView(ListView):
@@ -108,3 +110,11 @@ def index_contacts(request):
 
 def contact_list(request):
     Contacts.objects.all()
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+
+    def get_queryset(self):
+        return get_categories_from_cache()
